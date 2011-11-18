@@ -10,13 +10,6 @@
       'initial': null,
     }, options, true);
 
-    var zoom = 0,
-    updateZoom = function() {
-      zoom = document.documentElement.clientWidth / (window.innerWidth * 1.2);
-    }
-    updateZoom();
-    $(window).resize(updateZoom);
-
     var lastApplied = '';
 
     return $(this).each(function() {
