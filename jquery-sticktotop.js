@@ -21,23 +21,17 @@
         var scrollTop = body.scrollTop,
         bottomBound = (options.bottomBound && document.height - options.bottomBound);
 
-        var applyFixed = (scrollTop >= initialOffset.top - options.offset.top),
+        var 
         applyBottomBound = (!!bottomBound && bottomBound < scrollTop),
+        applyFixed = (scrollTop >= initialOffset.top - options.offset.top),
         applyInitial = !applyFixed;
-        
+
+        applyFixed = applyFixed && !applyBottomBound;
+
         if (applyBottomBound && lastApplied != 'bottomBound') {
-          var currentPos = $sticky.position(),
-          parentOffset = $sticky.parent().offset() || {top: 0, left: 0};
+          var currentPos = $sticky.position();
 
-          var top = currentPos.top - parentOffset.top;
-          if (top < 0)
-            top = currentPos.top;
-
-          var left = (currentPos.left - parentOffset.left);
-          if (left < 0)
-            left = currentPos.left;
-
-          $sticky.css({'position': 'absolute', 'top': top + 'px' , 'left': left + 'px'});
+          $sticky.css({'position': 'absolute', 'top': bottomBound + 'px' , 'left': currentPos.left + 'px'});
           lastApplied = 'bottomBound';
           return;
         }
