@@ -1,10 +1,12 @@
-(function($) {
+(function(document, $) {
+
+  var body = document.body;
 
   $.fn.stickToTop = function(options) {
     options = $.extend({
       'scrollParent': window,
       'offset': {top: 0, left: 0},
-      'maxScroll': 0,
+      'bottomBound': 0,
       'initial': null,
     }, options, true);
 
@@ -15,20 +17,24 @@
     updateZoom();
     $(window).resize(updateZoom);
 
+    var lastApplied = '';
+
     return $(this).each(function() {
-      var sticky = $(this),
-      initialOffset = sticky.offset(),
-      initialPositioning = sticky.css('position'),
+      var $sticky = $(this),
+      initialOffset = $sticky.offset(),
+      initialPositioning = $sticky.css('position'),
 
       fnScrollHandler = function() {
-        var scrollTop = $(this).scrollTop();
+        var scrollTop = body.scrollTop,
+        bottomBound = (options.bottomBound && document.height - options.bottomBound);
 
-        if (options.maxScroll && (options.maxScroll < scrollTop)) {
-          if (sticky.css('position') == 'absolute')
-            return;
-
-          var currentPos = sticky.position(),
-          parentOffset = sticky.parent().offset() || {top: 0, left: 0};
+        var applyFixed = (scrollTop >= initialOffset.top - options.offset.top),
+        applyBottomBound = (!!bottomBound && bottomBound < scrollTop),
+        applyInitial = !applyFixed;
+        
+        if (applyBottomBound && lastApplied != 'bottomBound') {
+          var currentPos = $sticky.position(),
+          parentOffset = $sticky.parent().offset() || {top: 0, left: 0};
 
           var top = currentPos.top - parentOffset.top;
           if (top < 0)
@@ -38,22 +44,28 @@
           if (left < 0)
             left = currentPos.left;
 
-          sticky.css({'position': 'absolute', 'top': top + 'px' , 'left': left + 'px'});
+          $sticky.css({'position': 'absolute', 'top': top + 'px' , 'left': left + 'px'});
+          lastApplied = 'bottomBound';
           return;
         }
 
-        if (scrollTop < initialOffset.top - options.offset.top) {
-          sticky.css({'position': initialPositioning, 'top': initialOffset.top, 'left': initialOffset.left});
+        if (applyInitial && lastApplied != 'initial') {
+          $sticky.css({'position': initialPositioning, 'top': initialOffset.top, 'left': initialOffset.left});
+          lastApplied = 'initial';
           return;
-        }       
-        
-        sticky.css({'position':'fixed', 'top': (options.offset.top || 0)+'px', 'left': (initialOffset.left + (options.offset.left || 0))+'px'});
+        }
+
+        if (applyFixed && lastApplied != 'fixed') {
+          $sticky.css({'position':'fixed', 'top': (options.offset.top || 0)+'px', 'left': (initialOffset.left + (options.offset.left || 0))+'px'});
+          lastApplied = 'fixed';
+          return;
+        }
       };
 
       if (options.initial) {
         initialPositioning = options.initial.position;
         initialOffset = {'top': options.initial.top, 'left': options.initial.left};
-        sticky.css(options.initial);
+        $sticky.css(options.initial);
       }
 
       if (initialPositioning == 'relative')
@@ -62,4 +74,4 @@
       $(options.scrollParent).scroll(fnScrollHandler);   
     });
   };
-}(jQuery))
+}(document, jQuery))
