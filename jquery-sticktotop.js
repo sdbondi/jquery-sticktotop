@@ -49,6 +49,14 @@
         }
       };
 
+      $(window).resize(function(e) { 
+        var thisPositioning = $sticky.css('position');
+        initialOffset.left = $sticky.css('position', initialPositioning).position().left;
+        $sticky.css('position', thisPositioning);        
+        lastApplied = ''; 
+        fnScrollHandler();
+      });
+
       if (options.initial) {
         initialPositioning = options.initial.position;
         initialOffset = {'top': options.initial.top, 'left': options.initial.left};
@@ -59,6 +67,7 @@
         initialPositioning = 'static';
 
       $(options.scrollParent).scroll(fnScrollHandler);   
+      fnScrollHandler();
     });
   };
-}(document, jQuery))
+}(self.document, self.jQuery))
