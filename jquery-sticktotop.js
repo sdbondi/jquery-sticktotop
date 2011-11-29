@@ -18,7 +18,7 @@
       initialPositioning = $sticky.css('position'),
 
       fnScrollHandler = function() {
-        var scrollTop = body.scrollTop,
+        var scrollTop = body.scrollTop || $(document).scrollTop(),
         bottomBound = (options.bottomBound && document.height - options.bottomBound);
 
         var 
