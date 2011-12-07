@@ -1,4 +1,5 @@
 (function(document, $) {
+  "use strict"
 
   var body = document.body;
 
@@ -16,6 +17,7 @@
       var $sticky = $(this),
       initialOffset = $sticky.offset(),
       initialPositioning = $sticky.css('position'),
+      initialWidth = $sticky.width(),
 
       fnScrollHandler = function() {
         var scrollTop = body.scrollTop || $(document).scrollTop(),
@@ -30,20 +32,27 @@
 
         if (applyBottomBound && lastApplied != 'bottomBound') {
           var currentPos = $sticky.position();
-
           $sticky.css({'position': 'absolute', 'top': bottomBound + 'px' , 'left': currentPos.left + 'px'});
           lastApplied = 'bottomBound';
           return;
         }
 
         if (applyInitial && lastApplied != 'initial') {
-          $sticky.css({'position': initialPositioning, 'top': initialOffset.top, 'left': initialOffset.left});
+          var props = {'position': initialPositioning};
+          if (initialPositioning != 'static')
+            $.extend(props, {'top': initialOffset.top, 'left': initialOffset.left});
+          $sticky.css(props);
           lastApplied = 'initial';
           return;
         }
 
         if (applyFixed && lastApplied != 'fixed') {
-          $sticky.css({'position':'fixed', 'top': (options.offset.top || 0)+'px', 'left': (initialOffset.left + (options.offset.left || 0))+'px'});
+          $sticky.css({
+            'position':'fixed', 
+            'top': (options.offset.top || 0)+'px', 
+            'left': (initialOffset.left + (options.offset.left || 0))+'px',
+            'width': initialWidth+'px'
+          });
           lastApplied = 'fixed';
           return;
         }

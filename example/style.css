@@ -1,0 +1,55 @@
+body { width: 100%; margin: 0; padding: 0;}
+header { 
+    background: #D3D3D3;
+    width: 100%;
+    height: 100px; 
+    margin-bottom: 30px;
+    padding: 10px;
+}
+header h1 { 
+    font-family: Verdana, sans-serif;
+    font-size: 1.769em;
+    line-height: 1.231;
+    padding-bottom: 12px;
+}
+
+div#primary {
+    width: 90%;
+    max-width: 960px;
+    margin: 0 auto; 
+}
+div#primary #content {
+    float: right;
+    width: 70%; 
+    height: 2000px; 
+    padding-left: 3.33%;
+
+    background-color: white;
+    background-image:-webkit-radial-gradient(closest-side, transparent 98%, rgba(0,0,0,.3) 99%),
+	  -webkit-radial-gradient(closest-side, transparent 98%, rgba(0,0,0,.3) 99%);
+    background-size:80px 80px;
+    background-position:0 0, 40px 40px;
+}
+aside { 
+    float: left;
+    width: 250px; 
+    height: 500px; 
+    background: #A7A7A7;
+}
+aside ul {
+    list-style-type: none;
+    margin-top: 30px;
+}
+aside ul li {
+    font-family: Verdana;
+    font-weight: bold;
+    font-style: normal;
+    text-transform: uppercase;
+    margin: 10px 0;
+}
+footer {
+    background: #D3D3D3; 
+    width: 100%; 
+    height: 700px; 
+    clear: both;
+}
