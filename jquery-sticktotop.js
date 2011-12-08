@@ -18,6 +18,7 @@
       initialOffset = $sticky.offset(),
       initialPositioning = $sticky.css('position'),
       initialWidth = $sticky.width(),
+      resizing = false,
 
       fnScrollHandler = function() {
         var scrollTop = body.scrollTop || $(document).scrollTop(),
@@ -59,11 +60,19 @@
       };
 
       $(window).resize(function(e) { 
-        var thisPositioning = $sticky.css('position');
-        initialOffset.left = $sticky.css('position', initialPositioning).position().left;
-        $sticky.css('position', thisPositioning);        
-        lastApplied = ''; 
-        fnScrollHandler();
+
+        if (resizing)
+          return;
+
+        resizing = true;
+        setTimeout(function() {
+          var thisPositioning = $sticky.css('position');
+          initialOffset.left = $sticky.css('position', initialPositioning).position().left;
+          $sticky.css('position', thisPositioning);        
+          lastApplied = ''; 
+          fnScrollHandler();
+          resizing = false;
+        }, 50);
       });
 
       if (options.initial) {
