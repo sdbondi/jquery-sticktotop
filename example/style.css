@@ -1,4 +1,6 @@
 body { width: 100%; margin: 0; padding: 0;}
+ul { list-style-type: none; }
+
 header { 
     background: #D3D3D3;
     width: 100%;
@@ -13,6 +15,20 @@ header h1 {
     padding-bottom: 12px;
 }
 
+header nav { 
+    display: block;
+    height: 50px;
+    width: 684px;
+    background-color: slategray;
+    padding: 1px 10px;
+    float: right;
+}
+
+header nav ul li {
+    float: left;
+    margin-left: 10px;
+}
+
 div#primary {
     width: 90%;
     max-width: 960px;
@@ -23,12 +39,13 @@ div#primary #content {
     width: 70%; 
     height: 2000px; 
     padding-left: 3.33%;
-
-    background-color: white;
-    background-image:-webkit-radial-gradient(closest-side, transparent 98%, rgba(0,0,0,.3) 99%),
-	  -webkit-radial-gradient(closest-side, transparent 98%, rgba(0,0,0,.3) 99%);
-    background-size:80px 80px;
-    background-position:0 0, 40px 40px;
+    
+    /* Carbon by Atle Mo (design), Sébastien Grosjean (code) */
+       background: 
+       -webkit-linear-gradient(63deg, #151515 5px, transparent 5px) 0 5px, -webkit-linear-gradient(243deg, #151515 5px, transparent 5px) 10px 0px, -webkit-linear-gradient(63deg, #222 5px, transparent 5px) 0px 10px, -webkit-linear-gradient(243deg, #222 5px, transparent 5px) 10px 5px, -webkit-linear-gradient(0deg, #1B1B1B 10px, transparent 10px),
+       -webkit-linear-gradient(#1D1D1D 25%, #1A1A1A 25%, #1A1A1A 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+       background-color: #131313;
+       background-size: 20px 20px;
 }
 aside { 
     float: left;
@@ -37,7 +54,6 @@ aside {
     background: #A7A7A7;
 }
 aside ul {
-    list-style-type: none;
     margin-top: 30px;
 }
 aside ul li {

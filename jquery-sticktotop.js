@@ -11,14 +11,14 @@
       'initial': null,
     }, options, true);
 
-    var lastApplied = '';
-
     return $(this).each(function() {
-      var $sticky = $(this),
+      var 
+      $sticky = $(this),
       initialOffset = $sticky.offset(),
       initialPositioning = $sticky.css('position'),
       initialWidth = $sticky.width(),
       resizing = false,
+      lastApplied = '',
 
       fnScrollHandler = function() {
         var scrollTop = body.scrollTop || $(document).scrollTop(),
