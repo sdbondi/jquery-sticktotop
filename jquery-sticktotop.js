@@ -1,24 +1,25 @@
+/*global window, setTimeout */
 (function(document, $) {
-  "use strict"
+  "use strict";
 
   var body = document.body;
 
   $.fn.stickToTop = function(options) {
     options = $.extend({
-      'scrollParent': window,
-      'offset': {top: 0, left: 0},
-      'bottomBound': 0,
-      'initial': null,
+      scrollParent: window,
+      offset: {top: 0, left: 0},
+      bottomBound: 0,
+      initial: null
     }, options, true);
 
+    var lastApplied = '';
+
     return $(this).each(function() {
-      var 
-      $sticky = $(this),
+      var $sticky = $(this),
       initialOffset = $sticky.offset(),
       initialPositioning = $sticky.css('position'),
       initialWidth = $sticky.width(),
       resizing = false,
-      lastApplied = '',
 
       fnScrollHandler = function() {
         var scrollTop = body.scrollTop || $(document).scrollTop(),
@@ -31,23 +32,24 @@
 
         applyFixed = applyFixed && !applyBottomBound;
 
-        if (applyBottomBound && lastApplied != 'bottomBound') {
+        if (applyBottomBound && lastApplied !== 'bottomBound') {
           var currentPos = $sticky.position();
           $sticky.css({'position': 'absolute', 'top': bottomBound + 'px' , 'left': currentPos.left + 'px'});
           lastApplied = 'bottomBound';
           return;
         }
 
-        if (applyInitial && lastApplied != 'initial') {
+        if (applyInitial && lastApplied !== 'initial') {
           var props = {'position': initialPositioning};
-          if (initialPositioning != 'static')
+          if (initialPositioning !== 'static') {
             $.extend(props, {'top': initialOffset.top, 'left': initialOffset.left});
+          }
           $sticky.css(props);
           lastApplied = 'initial';
           return;
         }
 
-        if (applyFixed && lastApplied != 'fixed') {
+        if (applyFixed && lastApplied !== 'fixed') {
           $sticky.css({
             'position':'fixed', 
             'top': (options.offset.top || 0)+'px', 
@@ -61,8 +63,9 @@
 
       $(window).resize(function(e) { 
 
-        if (resizing)
+        if (resizing) {
           return;
+        }
 
         resizing = true;
         setTimeout(function() {
@@ -81,11 +84,12 @@
         $sticky.css(options.initial);
       }
 
-      if (initialPositioning == 'relative')
+      if (initialPositioning === 'relative') {
         initialPositioning = 'static';
+      }
 
       $(options.scrollParent).scroll(fnScrollHandler);   
       fnScrollHandler();
     });
   };
-}(self.document, self.jQuery))
+}(window.document, window.jQuery));
