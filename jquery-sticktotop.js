@@ -23,9 +23,7 @@
 
       fnScrollHandler = function() {
         var scrollTop = body.scrollTop || $(document).scrollTop(),
-        bottomBound = (options.bottomBound && document.height - options.bottomBound);
-
-        var 
+        bottomBound = (options.bottomBound && body.offsetHeight - options.bottomBound),
         applyBottomBound = (!!bottomBound && bottomBound < scrollTop),
         applyFixed = (scrollTop >= initialOffset.top - options.offset.top),
         applyInitial = !applyFixed;
