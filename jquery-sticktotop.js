@@ -1,10 +1,8 @@
-/*global window, setTimeout */
+/*global window */
 (function(document, $) {
   "use strict";
 
   $.fn.stickToTop = function(options) {
-    var body = document.body;
-
     options = $.extend({
       scrollParent: window,
       offset: {top: 0, left: 0},
@@ -12,7 +10,8 @@
       initial: null
     }, options, true);
 
-    var lastApplied = '';
+    var scrollParent = options.scrollParent,
+    lastApplied = '';
 
     return $(this).each(function() {
       var $sticky = $(this),
@@ -22,8 +21,8 @@
       resizing = false,
 
       fnScrollHandler = function() {
-        var scrollTop = body.scrollTop || $(document).scrollTop(),
-        bottomBound = (options.bottomBound && body.offsetHeight - options.bottomBound),
+        var scrollTop = scrollParent.scrollTop || $(document).scrollTop(),
+        bottomBound = (options.bottomBound && scrollParent.offsetHeight - options.bottomBound),
         applyBottomBound = (!!bottomBound && bottomBound < scrollTop),
         applyFixed = (scrollTop >= initialOffset.top - options.offset.top),
         applyInitial = !applyFixed;
@@ -60,13 +59,12 @@
       };
 
       $(window).resize(function(e) { 
-
         if (resizing) {
           return;
         }
 
         resizing = true;
-        setTimeout(function() {
+        window.setTimeout(function() {
           var thisPositioning = $sticky.css('position');
           initialOffset.left = $sticky.css('position', initialPositioning).position().left;
           $sticky.css('position', thisPositioning);        
