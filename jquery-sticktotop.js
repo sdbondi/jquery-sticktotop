@@ -2,9 +2,9 @@
 (function(document, $) {
   "use strict";
 
-  var body = document.body;
-
   $.fn.stickToTop = function(options) {
+    var body = document.body;
+
     options = $.extend({
       scrollParent: window,
       offset: {top: 0, left: 0},
