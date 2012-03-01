@@ -11,11 +11,12 @@
     }, options, true);
 
     var scrollParent = options.scrollParent,
-    lastApplied = '';
+    lastApplied = '',
+    parentPosition = $((scrollParent === window) ? scrollParent.document.body : scrollParent).offset();
 
     return $(this).each(function() {
       var $sticky = $(this),
-      initialOffset = $sticky.offset(),
+      initialPosition = $sticky.position(),
       initialPositioning = $sticky.css('position'),
       initialWidth = $sticky.width(),
       resizing = false,
@@ -24,7 +25,7 @@
         var scrollTop = scrollParent.scrollTop || $(document).scrollTop(),
         bottomBound = (options.bottomBound && scrollParent.offsetHeight - options.bottomBound),
         applyBottomBound = (!!bottomBound && bottomBound < scrollTop),
-        applyFixed = (scrollTop >= initialOffset.top - options.offset.top),
+        applyFixed = (scrollTop >= initialPosition.top - options.offset.top),
         applyInitial = !applyFixed;
 
         applyFixed = applyFixed && !applyBottomBound;
@@ -39,7 +40,7 @@
         if (applyInitial && lastApplied !== 'initial') {
           var props = {'position': initialPositioning};
           if (initialPositioning !== 'static') {
-            $.extend(props, {'top': initialOffset.top, 'left': initialOffset.left});
+            $.extend(props, {'top': initialPosition.top + 'px', 'left': initialPosition.left + 'px'});
           }
           $sticky.css(props);
           lastApplied = 'initial';
@@ -49,8 +50,8 @@
         if (applyFixed && lastApplied !== 'fixed') {
           $sticky.css({
             'position':'fixed', 
-            'top': (options.offset.top || 0)+'px', 
-            'left': (initialOffset.left + (options.offset.left || 0))+'px',
+            'top': parentPosition.top + (options.offset.top || 0)+'px', 
+            'left': (parentPosition.left + initialPosition.left + (options.offset.left || 0))+'px',
             'width': initialWidth+'px'
           });
           lastApplied = 'fixed';
@@ -66,7 +67,7 @@
         resizing = true;
         window.setTimeout(function() {
           var thisPositioning = $sticky.css('position');
-          initialOffset.left = $sticky.css('position', initialPositioning).position().left;
+          initialPosition.left = $sticky.css('position', initialPositioning).position().left;
           $sticky.css('position', thisPositioning);        
           lastApplied = ''; 
           fnScrollHandler();
@@ -76,7 +77,7 @@
 
       if (options.initial) {
         initialPositioning = options.initial.position;
-        initialOffset = {'top': options.initial.top, 'left': options.initial.left};
+        initialPosition = {'top': options.initial.top, 'left': options.initial.left};
         $sticky.css(options.initial);
       }
 
