@@ -21,6 +21,7 @@
     lRight: '#C77D48',
     smallL: '#C77D48'
   },
+  BLOCK_SIZE = 25,
 
   Block = function(shape, color, options) {
     
@@ -42,7 +43,7 @@
     // Methods
     this.initialize = function() {
       this.options = $.extend({
-        blockSize: 25,
+        blockSize: BLOCK_SIZE,
         css: null
       }, this.options)
 
@@ -120,7 +121,7 @@
     }
 
     var parent = document.body,
-    data = [
+    blocks = [
       {shape: shapes.stepRight, color: colors.stepRight ,coord: {x:1,  y:0}, rotation: 90},
       {shape: shapes.t, color: colors.t                 ,coord: {x:3,  y:0}, rotation: 90},
       {shape: shapes.square, color: colors.square       ,coord: {x:8,  y:0}, rotation: 0},
@@ -145,26 +146,26 @@
       {shape: shapes.longL, color: colors.longL         ,coord: {x:7,  y:7}, rotation: 90},
       {shape: shapes.t, color: colors.t                 ,coord: {x:6,  y:7}, rotation: 270},
       {shape: shapes.smallL, color: colors.smallL       ,coord: {x:5,  y:9}, rotation: 180}
-    ], l = data.length;
+    ], l = blocks.length;
     
     while (l--) {
-      var datum = data[l],
-      block = new Block(datum.shape, datum.color),
+      var blockData = blocks[l],
+      block = new Block(blockData.shape, blockData.color),
       randY = Math.round((Math.random() * 100) + 8),
-      blockSize = block.options.blockSize;
+      canvas = block.canvas;
 
-      block.canvas.style.left = datum.coord.x * blockSize;
-      block.canvas.style.top = randY * blockSize;
+      canvas.style.left = blockData.coord.x * BLOCK_SIZE;
+      canvas.style.top = randY * BLOCK_SIZE;
       
-      block.canvas.addEventListener('click', function(e) {
+      canvas.addEventListener('click', function(e) {
         this.block.rotate(90);
         e.preventDefault();
       });
 
-      block.rotate(datum.rotation).draw();      
-      parent.appendChild(block.canvas);
+      block.rotate(blockData.rotation).draw();      
+      parent.appendChild(canvas);
 
-      $(block.canvas).stickToTop({offset: {top: datum.coord.y * blockSize}});
+      $(block.canvas).stickToTop({offset: {top: blockData.coord.y * BLOCK_SIZE}});
     }
 
     document.body.style.height = "3900px";

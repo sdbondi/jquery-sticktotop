@@ -7,7 +7,8 @@
       scrollParent: window,
       offset: {top: 0, left: 0},
       bottomBound: 0,
-      initial: null
+      onStick: null,
+      onDetach: null
     }, options, true);
 
     var scrollParent = options.scrollParent,
@@ -15,7 +16,8 @@
     parentPosition = $((scrollParent === window) ? scrollParent.document.body : scrollParent).offset();
 
     return $(this).each(function() {
-      var $sticky = $(this),
+      var sticky = this,
+      $sticky = $(sticky),
       initialPosition = $sticky.position(),
       initialPositioning = $sticky.css('position'),
       initialWidth = $sticky.width(),
@@ -23,9 +25,9 @@
 
       fnScrollHandler = function() {
         var scrollTop = scrollParent.scrollTop || $(document).scrollTop(),
-        bottomBound = (options.bottomBound && scrollParent.offsetHeight - options.bottomBound),
+        bottomBound = (options.bottomBound && ((scrollParent == window) ? window.document.body : scrollParent).offsetHeight - options.bottomBound),
         applyBottomBound = (!!bottomBound && bottomBound < scrollTop),
-        applyFixed = (scrollTop >= initialPosition.top - options.offset.top),
+        applyFixed = (scrollTop >= initialPosition.top - options.offset.top + parentPosition.top),
         applyInitial = !applyFixed;
 
         applyFixed = applyFixed && !applyBottomBound;
@@ -34,6 +36,9 @@
           var currentPos = $sticky.position();
           $sticky.css({'position': 'absolute', 'top': bottomBound + 'px' , 'left': currentPos.left + 'px'});
           lastApplied = 'bottomBound';
+          if (options.onDetach) {
+            options.onDetach.call(sticky);
+          }
           return;
         }
 
@@ -44,6 +49,9 @@
           }
           $sticky.css(props);
           lastApplied = 'initial';
+          if (options.onDetach) {
+            options.onDetach.call(sticky);
+          }
           return;
         }
 
@@ -55,6 +63,9 @@
             'width': initialWidth+'px'
           });
           lastApplied = 'fixed';
+          if (options.onStick) {
+            options.onStick.call(sticky);
+          }
           return;
         }
       };
@@ -75,18 +86,11 @@
         }, 50);
       });
 
-      if (options.initial) {
-        initialPositioning = options.initial.position;
-        initialPosition = {'top': options.initial.top, 'left': options.initial.left};
-        $sticky.css(options.initial);
-      }
-
       if (initialPositioning === 'relative') {
         initialPositioning = 'static';
       }
 
       $(options.scrollParent).scroll(fnScrollHandler);   
-      fnScrollHandler();
     });
   };
 }(window.document, window.jQuery));
