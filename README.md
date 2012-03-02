@@ -28,9 +28,13 @@ bottomBound:
   crashing into it.
   default: 0
 
-initial:
-  Initial CSS values to be applied to the element.
-  Shouldn't have to be used - but can be useful for troublesome elements.
+onStick: 
+  Callback for when the element becomes sticky.
+  default: null
+
+onDetach:
+  Callback for when the element becomes detached. Also fires when 
+  the bottomBound is reached.
   default: null
 
 ## License
