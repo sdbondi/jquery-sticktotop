@@ -37,6 +37,19 @@ onDetach:
   the bottomBound is reached.
   default: null
 
+## Examples
+
+### Sidebar
+
+The "normal" use-case for this plugin demostrated applying the pluygin to a side and menu bar.
+
+### Tetris Hearts
+
+Using this plugin to position many elements (in this case a canvas with a tetris block painted
+inside of it) and stick them to their appropriate places while scrolling to form a heart.
+
+Visit [this blog post](http://mopo.ws/wZz1Xb) for a full explanation
+
 ## License
 
 See the file [LICENSE](https://github.com/sdbondi/JQuery-StickToTop/blob/master/LICENSE.txt)
