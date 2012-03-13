@@ -41,7 +41,7 @@ onDetach:
 
 ### Sidebar
 
-The "normal" use-case for this plugin demostrated applying the pluygin to a side and menu bar.
+The "normal" use-case for this plugin demostrated applying the plugin to a side and menu bar.
 
 ### Tetris Hearts
 
