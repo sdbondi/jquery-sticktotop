@@ -26,11 +26,9 @@
 
       fnScrollHandler = function() {
         var scrollTop = scrollParent.scrollTop || $(document).scrollTop(),
+        parentHeight = ((scrollParent == window) ? window.document.body : scrollParent).offsetHeight,
         // If bottomBound, calculate bottom bound including height of the sticky
-        bottomBound = options.bottomBound && 
-          ((scrollParent == window) ? 
-           window.document.body : 
-           scrollParent).offsetHeight - options.bottomBound - stickyHeight,
+        bottomBound = options.bottomBound && (parentHeight - options.bottomBound - stickyHeight),
 
         applyBottomBound = (!!bottomBound && bottomBound < scrollTop),
 

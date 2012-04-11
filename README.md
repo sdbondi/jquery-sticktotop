@@ -28,6 +28,9 @@ bottomBound:
   crashing into it.
   default: 0
 
+**Note**: bottomBound now includes the height of the sticky element in the calculation
+to make bottomBound more intuitive (issue #1)
+
 onStick: 
   Callback for when the element becomes sticky.
   default: null
