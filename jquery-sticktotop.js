@@ -73,9 +73,8 @@
           }
           return;
         }
-      };
-
-      $(window).resize(function(e) { 
+      },
+      fnResizeHandler = function(e) { 
         if (resizing) {
           return;
         }
@@ -89,13 +88,22 @@
           fnScrollHandler();
           resizing = false;
         }, 50);
-      });
+      };
+
+      $(window).on('resize', fnResizeHandler);
 
       if (initialPositioning === 'relative') {
         initialPositioning = 'static';
       }
 
-      $(options.scrollParent).scroll(fnScrollHandler);   
+      $(options.scrollParent).on('scroll', fnScrollHandler);   
+
+      // Function to stop stickToTop
+      this.unstickToTop = function() {
+        $(options.scrollParent).off('scroll', fnScrollHandler);
+        $(window).off('resize', fnResizeHandler);
+      };
     });
   };
+
 }(window.document, window.jQuery));

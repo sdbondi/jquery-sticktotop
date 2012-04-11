@@ -1,4 +1,4 @@
-# jquery-sticktotop.js
+# jquery-sticktotop.js Version 0.1.1
 
 A JQuery plugin to make your elements stick to the top when scrolling a webpage.
 It takes the initial position of any element and gives the element a fixed 
@@ -7,8 +7,9 @@ Perfect for sidebars.
 
 ## Usage
 
-   $('aside').stickToTop(options);
-
+```javascript
+$('aside').stickToTop(options);
+```
 ## Options
 
 scrollParent: 
@@ -40,6 +41,20 @@ onDetach:
   the bottomBound is reached.
   default: null
 
+## unstickToTop
+
+You can detach stickToTop from your element by using the unstickToTop() function
+
+```javascript
+var $aside = $('aside');
+
+// Attach
+$aside.stickToTop();
+
+...
+// Detach
+$aside.get(0).unstickToTop();
+```
 ## Examples
 
 ### Sidebar
