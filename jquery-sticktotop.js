@@ -21,12 +21,19 @@
       initialPosition = $sticky.position(),
       initialPositioning = $sticky.css('position'),
       initialWidth = $sticky.width(),
+      stickyHeight = $sticky.outerHeight(true),
       resizing = false,
 
       fnScrollHandler = function() {
         var scrollTop = scrollParent.scrollTop || $(document).scrollTop(),
-        bottomBound = (options.bottomBound && ((scrollParent == window) ? window.document.body : scrollParent).offsetHeight - options.bottomBound),
+        // If bottomBound, calculate bottom bound including height of the sticky
+        bottomBound = options.bottomBound && 
+          ((scrollParent == window) ? 
+           window.document.body : 
+           scrollParent).offsetHeight - options.bottomBound - stickyHeight,
+
         applyBottomBound = (!!bottomBound && bottomBound < scrollTop),
+
         applyFixed = (scrollTop >= initialPosition.top - options.offset.top + parentPosition.top),
         applyInitial = !applyFixed;
 
