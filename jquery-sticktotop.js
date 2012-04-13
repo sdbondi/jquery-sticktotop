@@ -23,6 +23,7 @@
       initialWidth = $sticky.width(),
       stickyHeight = $sticky.outerHeight(true),
       resizing = false,
+      unsticking = false,
 
       fnScrollHandler = function() {
         var scrollTop = scrollParent.scrollTop || $(document).scrollTop(),
@@ -81,6 +82,10 @@
 
         resizing = true;
         window.setTimeout(function() {
+          if (unsticking) {
+            return;
+          }
+
           var thisPositioning = $sticky.css('position');
           initialPosition.left = $sticky.css('position', initialPositioning).position().left;
           $sticky.css('position', thisPositioning);        
@@ -100,6 +105,7 @@
 
       // Function to stop stickToTop
       this.unstickToTop = function() {
+        unsticking = true;
         $(options.scrollParent).off('scroll', fnScrollHandler);
         $(window).off('resize', fnResizeHandler);
       };
