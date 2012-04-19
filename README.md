@@ -27,7 +27,13 @@ bottomBound:
   from sticking (absolute positioning).
   Useful if you have a large footer and dont want your sidebar 
   crashing into it.
-  default: 0
+  default: false (no bottom bound)
+
+minParentHeight:
+  The minimum height of the parent/window in which stickToTop will be active.
+  If less than the minimum height stickToTop will have no effect but will
+  become active as soon as the parent/window height is greater than minParentHeight.
+  default: false (no min height)
 
 **Note**: bottomBound now includes the height of the sticky element in the calculation
 to make bottomBound more intuitive (issue #1)

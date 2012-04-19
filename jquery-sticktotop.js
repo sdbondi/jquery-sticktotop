@@ -6,7 +6,8 @@
     options = $.extend({
       scrollParent: window,
       offset: {top: 0, left: 0},
-      bottomBound: 0,
+      minParentHeight: false,
+      bottomBound: false,
       onStick: null,
       onDetach: null
     }, options, true);
@@ -35,6 +36,8 @@
 
         applyFixed = (scrollTop >= initialPosition.top - options.offset.top + parentPosition.top),
         applyInitial = !applyFixed;
+
+        if (options.minParentHeight && parentHeight < options.minParentHeight) { return; };
 
         applyFixed = applyFixed && !applyBottomBound;
 
