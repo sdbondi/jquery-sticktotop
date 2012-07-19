@@ -13,7 +13,12 @@
     }, options, true);
 
     var scrollParent = options.scrollParent,
-    lastApplied = '',
+    /*
+    1: BottomBound
+    2: Initial
+    3: Fixed
+    */
+    lastApplied = 0, 
     parentPosition = $((scrollParent === window) ? scrollParent.document.body : scrollParent).offset();
 
     return $(this).each(function() {
@@ -37,41 +42,40 @@
         applyFixed = (scrollTop >= initialPosition.top - options.offset.top + parentPosition.top),
         applyInitial = !applyFixed;
 
-        if (options.minParentHeight && parentHeight < options.minParentHeight) { return; };
-
         applyFixed = applyFixed && !applyBottomBound;
 
-        if (applyBottomBound && lastApplied !== 'bottomBound') {
+        if (applyBottomBound && lastApplied !== 1) {
           var currentPos = $sticky.position();
           $sticky.css({'position': 'absolute', 'top': bottomBound + 'px' , 'left': currentPos.left + 'px'});
-          lastApplied = 'bottomBound';
+          lastApplied = 1;
           if (options.onDetach) {
             options.onDetach.call(sticky);
           }
           return;
         }
 
-        if (applyInitial && lastApplied !== 'initial') {
+        if ((applyInitial && lastApplied !== 2) ||
+           (options.minParentHeight && parentHeight < options.minParentHeight)) {
           var props = {'position': initialPositioning};
           if (initialPositioning !== 'static') {
             $.extend(props, {'top': initialPosition.top + 'px', 'left': initialPosition.left + 'px'});
           }
           $sticky.css(props);
-          lastApplied = 'initial';
+          lastApplied = 2;
           if (options.onDetach) {
             options.onDetach.call(sticky);
           }
           return;
         }
 
-        if (applyFixed && lastApplied !== 'fixed') {
+        if (applyFixed && lastApplied !== 3) {
           $sticky.css({
             'position':'fixed', 
             'top': parentPosition.top + (options.offset.top || 0)+'px', 
             'left': (parentPosition.left + initialPosition.left + (options.offset.left || 0))+'px',
             'width': initialWidth+'px'
           });
-          lastApplied = 'fixed';
+          lastApplied = 3;
           if (options.onStick) {
             options.onStick.call(sticky);
           }
