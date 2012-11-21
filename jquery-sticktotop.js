@@ -7,6 +7,7 @@
       scrollParent: window,
       offset: {top: 0, left: 0},
       minParentHeight: false,
+      minParentWidth: false,
       bottomBound: false,
       onStick: null,
       onDetach: null
@@ -34,13 +35,17 @@
       fnScrollHandler = function() {
         var scrollTop = scrollParent.scrollTop || $(document).scrollTop(),
         parentHeight = ((scrollParent == window) ? window.document.body : scrollParent).offsetHeight,
+        parentWidth = ((scrollParent == window) ? window.document.body : scrollParent).offsetWidth,
         // If bottomBound, calculate bottom bound including height of the sticky
         bottomBound = options.bottomBound && (parentHeight - options.bottomBound - stickyHeight),
 
         applyBottomBound = (!!bottomBound && bottomBound < scrollTop),
 
         applyFixed = (scrollTop >= initialPosition.top - options.offset.top + parentPosition.top),
+        if (options.minParentWidth && parentWidth < options.minParentWidth ) { applyFixed = false; }
         applyInitial = !applyFixed;
+        
+        
 
         applyFixed = applyFixed && !applyBottomBound;
 
@@ -73,7 +78,8 @@
             'position':'fixed', 
             'top': parentPosition.top + (options.offset.top || 0)+'px', 
             'left': (parentPosition.left + initialPosition.left + (options.offset.left || 0))+'px',
-            'width': initialWidth+'px'
+            'width': initialWidth+'px',
+            'z-index': 1000
           });
           lastApplied = 3;
           if (options.onStick) {
