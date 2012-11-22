@@ -60,7 +60,7 @@ $('aside').stickToTop(options);
     occupies the original flow.<br><br>
 
     **Note: Floated elements do not occupy flow in the same manner as non-floated elements.<br>
-    preserveLayout should be set to false when stickToTop is applied to floated elements.<br>
+    preserveLayout should be set to false when stickToTop is applied to floated elements.<br><br>
     default: true</td>
   </tr>
   <tr>
