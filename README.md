@@ -12,24 +12,24 @@ $('aside').stickToTop(options);
 ```
 ## Options
 
-scrollParent: 
+`scrollParent: `
   Element in which scrolling is monitored.
   default: DOM window
 
-offset:
+`offset:`
   Scroll offset to apply fixed positioning (sticking).
   Basically the gap left at all times between the scrollParent 
   and the target element.
   default: {top: 0, left: 0}
 
-bottomBound:
+`bottomBound:`
   Scroll value relative to the bottom which to stop the element
   from sticking (absolute positioning).
   Useful if you have a large footer and dont want your sidebar 
   crashing into it.
   default: false (no bottom bound)
 
-minParentHeight:
+`minParentHeight:`
   The minimum height of the parent/window in which stickToTop will be active.
   If less than the minimum height stickToTop will have no effect but will
   become active as soon as the parent/window height is greater than minParentHeight.
@@ -38,11 +38,11 @@ minParentHeight:
 **Note**: bottomBound now includes the height of the sticky element in the calculation
 to make bottomBound more intuitive (issue #1)
 
-onStick: 
+`onStick: `
   Callback for when the element becomes sticky.
   default: null
 
-onDetach:
+`onDetach:`
   Callback for when the element becomes detached. Also fires when 
   the bottomBound is reached.
   default: null
