@@ -165,7 +165,7 @@
       block.rotate(blockData.rotation).draw();      
       parent.appendChild(canvas);
 
-      $(block.canvas).stickToTop({offset: {top: blockData.coord.y * BLOCK_SIZE}});
+      $(block.canvas).stickToTop({offset: {top: blockData.coord.y * BLOCK_SIZE}, preserveLayout: false});
     }
 
     document.body.style.height = "3900px";
