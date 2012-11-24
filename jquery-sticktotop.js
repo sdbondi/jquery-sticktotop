@@ -1,6 +1,6 @@
 /*global window */
 (function(document, $) {
-    "use strict";
+		"use strict";
 
 	$.fn.stickToTop = function(options) {
 		options = $.extend({
