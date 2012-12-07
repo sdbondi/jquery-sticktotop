@@ -1,63 +1,63 @@
 @charset "UTF-8";
 /* ==|== &colours ==============================================================
 
-     colour													#
+     colour							#
 
 	 ========================================================================== */
 /* ==|== &INDEX ================================================================
 
 	1. BASE STYLES
-		1.a Normalize
-			1.a.i HTML5 display definitions
-			1.a.ii Base
-			1.a.iii Links
-			1.a.iv Typography
-			1.a.v Lists
-			1.a.vi Embedded content
-			1.a.vii Figures
-			1.a.viii Forms
-			1.a.ix Tables
-			1.a.x Chrome Frame Prompt
-		1.b Fonts
+	1.a Normalize
+		1.a.i HTML5 display definitions
+		1.a.ii Base
+		1.a.iii Links
+		1.a.iv Typography
+		1.a.v Lists
+		1.a.vi Embedded content
+		1.a.vii Figures
+		1.a.viii Forms
+		1.a.ix Tables
+		1.a.x Chrome Frame Prompt
+	1.b Fonts
 
 	2. BLOCKS
-		2.a Main Structure
-			2.a.i Header
-			2.a.ii Primary Content
-			2.a.iii Secondary Content
-			2.a.iv Footer
-		2.b Media Block
-		2.c Flex Video
-		2.d Navigation
-		2.e Buttons
-		2.f Forms
-			2.f.i Date Picker
-			2.f.ii Autocomplete
-			2.f.iii Wysiwyg
-		2.g Icons
-		2.h Alerts
-		2.i Labels
-		2.j Gallery
-		2.k Pagination
-		2.l Comments
-			2.l.i Comment
-			2.l.ii Pingbacks / Trackbacks
-			2.l.iii Comment Form
-		2.m Widgets
-		2.n Progress Bars
-		2.o Drag & Drop
-		2.p Tool Tips
+	2.a Main Structure
+		2.a.i Header
+		2.a.ii Primary Content
+		2.a.iii Secondary Content
+		2.a.iv Footer
+	2.b Media Block
+	2.c Flex Video
+	2.d Navigation
+	2.e Buttons
+	2.f Forms
+		2.f.i Date Picker
+		2.f.ii Autocomplete
+		2.f.iii Wysiwyg
+	2.g Icons
+	2.h Alerts
+	2.i Labels
+	2.j Gallery
+	2.k Pagination
+	2.l Comments
+		2.l.i Comment
+		2.l.ii Pingbacks / Trackbacks
+		2.l.iii Comment Form
+	2.m Widgets
+	2.n Progress Bars
+	2.o Drag & Drop
+	2.p Tool Tips
 
 	3. GENERAL STYLING
-		3.a Typography
-			3.a.i Headers
-			3.a.ii Lists
-			3.a.iii Horizontal Rules
-			3.a.iv Typography Modifiers
-		3.b Backgrounds & Borders
-		3.c Layout
-			3.c.i Layout Modifiers
-		3.d Helpers
+	3.a Typography
+		3.a.i Headers
+		3.a.ii Lists
+		3.a.iii Horizontal Rules
+		3.a.iv Typography Modifiers
+	3.b Backgrounds & Borders
+	3.c Layout
+		3.c.i Layout Modifiers
+	3.d Helpers
 
 	4. ANIMATIONS
 
@@ -84,7 +84,7 @@
  * 1. Corrects `block` display not defined in IE 8/9.
  * 2. Corrects `inline-block` display not defined in IE 8/9.
  * 3. Prevents modern browsers from displaying `audio` without controls.
- *		Remove excess height in iOS 5 devices.
+ *	Remove excess height in iOS 5 devices.
  * 4. Addresses styling for `hidden` attribute not present in IE 8/9.
  *
  * Apply a natural box layout model to all elements.
@@ -463,7 +463,7 @@ button[disabled], input[disabled], :disabled, .disabled, .unselectable {
  * 4. Addresses `box-sizing` set to `border-box` in Safari 5 and Chrome
  *    (include `-moz` to future-proof).
  * 5. Removes inner padding and search cancel button in Safari 5 and Chrome
- * 		on OS X.
+ * 	on OS X.
  */
 input[type="checkbox"], input[type="radio"] {
   box-sizing: border-box;
