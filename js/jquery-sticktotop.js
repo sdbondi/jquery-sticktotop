@@ -31,8 +31,7 @@
 				initialPositioning = $sticky.css('position'),
 				initialWidth = $sticky.outerWidth(true),
 				initialHeight = $sticky.outerHeight(true),
-				initialMarginTop = (initialHeight !== $sticky.outerHeight() ? parseInt($sticky.css('margin-top'),10) : 0 ),
-				initialMarginBottom = (initialHeight !== $sticky.outerHeight() ? parseInt($sticky.css('margin-bottom'),10) : 0 ),
+				initialMarginTop = (parseInt($sticky.css('margin-top'),10)),
 				resizing = false,
 				unsticking = false,
 				$layoutDiv,
@@ -148,9 +147,8 @@
 						// Update layout div
 						$layoutDiv.css({
 							width: initialWidth,
-							height: initialHeight,
-							'margin-top': initialMarginTop,
-							'margin-bottom': initialMarginBottom
+							height: initialHeight - initialMarginTop,
+							'margin-top': initialMarginTop
 						});
 					}
 
@@ -175,8 +173,9 @@
 
 			if ( options.preserveLayout ) {
 				$layoutDiv = $('<div class="stickToTopLayout"></div>').css({
-					'height': initialHeight,
-					'width': initialWidth
+					'height': initialHeight - initialMarginTop,
+					'width': initialWidth,
+					'margin-top': initialMarginTop
 				});
 				$layoutDiv = $sticky.wrap($layoutDiv).parent();
 			}

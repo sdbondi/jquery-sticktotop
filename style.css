@@ -798,6 +798,8 @@ button.d-block {
 }
 
 /* margin modifiers */
+.mb-alpha { margin-bottom: 1rem;}
+
 .mtb-beta {
     margin-top: 2rem;
     margin-bottom: 2rem;
