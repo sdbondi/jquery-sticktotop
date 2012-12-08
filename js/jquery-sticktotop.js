@@ -32,6 +32,7 @@
 				initialWidth = $sticky.outerWidth(true),
 				initialHeight = $sticky.outerHeight(true),
 				initialMarginTop = (initialHeight !== $sticky.outerHeight() ? parseInt($sticky.css('margin-top'),10) : 0 ),
+				initialMarginBottom = (initialHeight !== $sticky.outerHeight() ? parseInt($sticky.css('margin-bottom'),10) : 0 ),
 				resizing = false,
 				unsticking = false,
 				$layoutDiv,
@@ -45,7 +46,7 @@
 
 				applyBottomBound = (!!bottomBound && bottomBound < scrollTop),
 
-				applyFixed = (scrollTop >= initialPosition.top - options.offset.top + parentPosition.top),
+				applyFixed = (scrollTop >= initialPosition.top - options.offset.top - initialMarginTop + parentPosition.top),
 				applyInitial = !applyFixed;
 
 				if (options.minParentWidth && parentWidth < options.minParentWidth ) {
@@ -89,13 +90,14 @@
 
 				// fixed
 				if (applyFixed && lastApplied !== 3) {
-					var css = $sticky.css({
-					'position':'fixed',
-					'top': parentPosition.top + initialMarginTop + (options.offset.top || 0) + 'px',
-					'left': (parentPosition.left + initialPosition.left + (options.offset.left || 0))+'px',
-					'width': initialWidth+'px',
-					'z-index': 1000
+					$sticky.css({
+						'position':'fixed',
+						'top': parentPosition.top + (options.offset.top || 0) + 'px',
+						'left': (parentPosition.left + initialPosition.left + (options.offset.left || 0))+'px',
+						'width': initialWidth+'px',
+						'z-index': 1000
 					});
+
 					lastApplied = 3;
 					if (options.onStick) {
 						options.onStick.call(sticky);
@@ -145,8 +147,10 @@
 
 						// Update layout div
 						$layoutDiv.css({
-							width: initialWidth + 'px',
-							height: initialHeight + 'px'
+							width: initialWidth,
+							height: initialHeight,
+							'margin-top': initialMarginTop,
+							'margin-bottom': initialMarginBottom
 						});
 					}
 
@@ -170,7 +174,10 @@
 			$(options.scrollParent).on('scroll', fnScrollHandler);
 
 			if ( options.preserveLayout ) {
-				$layoutDiv = $('<div></div>').css({'height': initialHeight, 'width': initialWidth});
+				$layoutDiv = $('<div class="stickToTopLayout"></div>').css({
+					'height': initialHeight,
+					'width': initialWidth
+				});
 				$layoutDiv = $sticky.wrap($layoutDiv).parent();
 			}
 

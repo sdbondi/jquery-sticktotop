@@ -811,6 +811,11 @@ button.d-block {
 
 .mb-gamma { margin-bottom: 3rem;}
 
+/* padding modifiers */
+.p-alpha {
+  padding: 16px;
+  padding: 1rem;
+}
 
 /* =============================================================================
      3.d &Helpers
