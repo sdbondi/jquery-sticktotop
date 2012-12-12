@@ -754,7 +754,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: normal;}
 /* =============================================================================
 	 3.b &Backgrounds & Borders
 	 ========================================================================== */
-.bgi-alpha { background: url(/assets/img/navy_blue.png) repeat left top;}
+.bgi-alpha { background: url(../img/navy_blue.png) repeat left top;}
 
 .bgc-alpha-mod {
     background-color: #fff;
