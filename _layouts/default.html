@@ -1,0 +1,33 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9 oldie" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+	{% include head.html %}
+	{% include JB/setup %}
+
+	<body class="bgi-alpha">
+
+		<!--[if lte IE 8]><div class="alert alert-danger">Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</div><![endif]-->
+
+		{% include header.html %}
+
+		<div class="wrap">
+			<div class="row cf">
+				<div class="col col-3">
+					{% include sidebar.html %}
+				</div><!-- .col -->
+
+				<div class="col col-9">
+					{{ content }}
+				</div><!-- .col -->
+			</div><!-- .row -->
+		</div>
+
+		{% include footer.html %}
+
+	</body>
+</html>

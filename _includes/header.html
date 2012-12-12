@@ -1,0 +1,20 @@
+<header>
+	<div class="bgc-alpha-mod">
+		<div class="wrap cf">
+			<h1><a href="{{ HOME_PATH }}">{{ site.title }}</a></h1>
+		</div>
+	</div>
+	<div class="{% if page.stickyNavClass%}{{ page.stickyNavClass }} {% endif %}bgc-beta-mod mb-beta">
+		<nav class="wrap ar">
+			<ul class="menu">
+				<li class="menu-item">demos:</li>
+				{% assign pages_list = site.pages %}
+				{% assign group = 'examples' %}
+				{% include JB/pages_list %}
+				<li class="menu-item"><a href="/">blah</a></li>
+				<li class="menu-item"><a href="/">blah</a></li>
+				<li class="menu-item"><a href="/">blah</a></li>
+				<li class="menu-item"><a href="/">blah</a></li>
+		</nav>
+	</div>
+</header>
