@@ -32,7 +32,6 @@
 				initialWidth = $sticky.outerWidth(true),
 				initialHeight = $sticky.outerHeight(true),
 				initialMarginTop = (parseInt($sticky.css('margin-top'),10)),
-				initialMarginBottom = (parseInt($sticky.css('margin-bottom'),10)),
 				resizing = false,
 				unsticking = false,
 				$layoutDiv,
@@ -126,7 +125,6 @@
 
 					$sticky.css({
 						position: thisPositioning,
-						// 'margin-bottom': initialMarginBottom,
 						width: 'auto'
 					});
 
@@ -139,25 +137,12 @@
 						initialWidth = $layoutDiv.outerWidth(true);
 						updatedHeight = $sticky.outerHeight(true);
 
-						// UpdatedHeight will somehow be assigned 0 breaking layout.
-						// Check for this explicitly, and don't assign initialHeight
-						// this value unless it is not 0.
-						// if (updatedHeight !==0 ) {
-						// 	initialHeight = updatedHeight;
-						// }
-
 						// Update layout div
 						$layoutDiv.css({
-							// width: initialWidth,
 							height: updatedHeight - initialMarginTop,
 							'margin-top': initialMarginTop
 						});
 					}
-
-					// $sticky.css({
-					// 	width: initialWidth,
-					// 	height: initialHeight
-					// });
 
 					lastApplied = '';
 					fnScrollHandler();
