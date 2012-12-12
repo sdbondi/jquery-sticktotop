@@ -1,0 +1,32 @@
+<head>
+	<meta charset="utf-8">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>{{ page.title }} | jQuery-sticktotop</title>
+	{% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+  <meta name="author" content="{{ site.author.name }}">
+
+	<!-- Mobile viewport optimized: h5bp.com/viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<!--[if ! lte IE 7]><!-->
+		<link href='http://fonts.googleapis.com/css?family=Raleway:100,200' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="assets/css/style.css">
+	<!--<![endif]-->
+
+	<!--[if lte IE 7]>
+		<link rel="stylesheet" href="http://universal-ie6-css.googlecode.com/files/ie6.1.1.css" media="screen, projection">
+	<![endif]-->
+
+	{% if page.customStyles %}
+		<style type="text/css">
+			{{ page.customStyles }}
+		</style>
+	{% endif %}
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>

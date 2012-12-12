@@ -1,0 +1,12 @@
+---
+layout: page
+title: tetris heart
+customStyles: |
+ canvas { position: absolute;}
+scriptSource:
+  - src: modernizr.custom.61180.js
+  - src: tetris-heart.js
+group: examples
+---
+
+<div class="canvasContainer"></div>

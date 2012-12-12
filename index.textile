@@ -1,0 +1,34 @@
+---
+layout: page
+title: Easily stick your menu or sidebar to the top of your page on scroll
+stickyNavClass: sticky
+scriptSnippet: $('.sticky').stickToTop();
+---
+
+All it takes to make an element stick is the following:
+
+pre(mb-gamma). $('.sticky').stickToTop();
+
+h2. Options:
+
+The plugin makes a few options available:
+
+pre. $('.sticky').stickToTop({ options });
+
+table(mb-beta).
+|_. Option							|_. Description |
+|_. @scrollParent:@			|Element in which scrolling is monitored.<br><br>default: DOM window|
+|_. @offset:@						|Scroll offset to apply fixed positioning (sticking).
+	Basically the gap left at all times between the scrollParent and the target element.<br><br>default: @{top: 0, left: 0}@|
+|_. @bottomBound:@			|Scroll value relative to the bottom which to stop the element from sticking (absolute positioning). <br>Useful if you have a large footer and dont want your sidebar	crashing into it. <br><br>default: @false@ (no bottom bound)</td>|
+|_. @minParentHeight:@	|The minimum height of the parent/window in which stickToTop will be active. <br>If less than the minimum height stickToTop will have no effect but will become active as soon as the parent/window height is greater than minParentHeight. <br><br>default: @false@ (no min height)|
+|_. @minParentWidth:@		|The minimum width of the parent/window in which stickToTop will be active.<br>
+	If less than the minimum width stickToTop will have no effect but will become active as soon as the parent/window width is greater than minParentWidth. <br>Useful for disabling stickToTop for mobile and tablet viewports. <br><br>==**==Note: If using ems for your media queries, make sure to multiply the respective value by 16. <br>"Browsers calculate media-query widths from the base UA font size":http://filamentgroup.com/lab/how_we_learned_to_leave_body_font_size_alone/, *NOT* html / body base font size. <br><br>default: @false@ (no min width)|
+|_. @preserveLayout:@		|Preserves layout of sticky elements by adding a div which
+	occupies the original flow. <br><br>==**==Note: Floated elements do not occupy flow in the same manner as non-floated elements. <br> @preserveLayout@ should be set to false when stickToTop is applied to floated elements. <br><br>default: @true@|
+|_. @onStick:@					|Callback for when the element becomes sticky. <br><br>default: @null@|
+|_. @onDetach:@					|Callback for when the element becomes detached. <br>Also fires when the bottomBound is reached. <br><br>default: @null@|
+
+h2. Dependencies:
+
+stickToTop requires jQuery.
