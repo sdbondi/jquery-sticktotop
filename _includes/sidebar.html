@@ -1,6 +1,8 @@
-<h2>Demos</h2>
-<ul class="menu sticky-sidebar bgc-alpha-mod">
-	{% assign pages_list = site.pages %}
-	{% assign group = 'demo' %}
-	{% include JB/pages_list %}
-</ul>
+<div class="{% if page.stickySidebarClass %}{{ page.stickySidebarClass }} {% endif %} cf">
+	<h2>Examples</h2>
+	<ul class="menu bgc-alpha-mod">
+		{% assign pages_list = site.pages %}
+		{% assign group = 'examples' %}
+		{% include JB/pages_list %}
+	</ul>
+</div>

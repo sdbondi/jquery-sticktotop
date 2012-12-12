@@ -130,7 +130,6 @@ audio:not([controls]) {
 }
 
 html {
-  background: #2b2b2b;
   font-size: 100%;
   /* 16 */
   -webkit-text-size-adjust: 100%;
@@ -144,6 +143,7 @@ html, button, input, select, textarea {
 }
 
 body {
+  background: #2b2b2b;
   font-family: 'Raleway', sans-serif;
   font-size: 1em;
   line-height: 1.75;

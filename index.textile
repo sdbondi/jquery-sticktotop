@@ -1,6 +1,8 @@
 ---
 layout: page
 title: Easily stick your menu or sidebar to the top of your page on scroll
+stickyNavClass: sticky
+scriptSnippet: $('.sticky').stickToTop();
 ---
 
 All it takes to make an element stick is the following:
