@@ -36,6 +36,24 @@
 				unsticking = false,
 				$layoutDiv,
 
+			fnGetWindowSize = function() {
+				var windowSize = {
+					width: 0,
+					height: 0
+				};
+
+				if( typeof( window.innerWidth ) == 'number' ) {
+					//Non-IE
+					windowSize.width = window.innerWidth;
+					windowSize.height = window.innerHeight;
+				} else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+					//IE 6+ in 'standards compliant mode'
+					windowSize.width = document.documentElement.clientWidth;
+					windowSize.height = document.documentElement.clientHeight;
+				}
+
+				return windowSize;
+			},
 			fnScrollHandler = function() {
 				var scrollTop = scrollParent.scrollTop || $(document).scrollTop(),
 				parentHeight = ((scrollParent == window) ? window.document.body : scrollParent).offsetHeight,
@@ -72,24 +90,24 @@
 					(options.minParentHeight && parentHeight < options.minParentHeight)) {
 					var props = {'position': initialPositioning};
 					if (initialPositioning === 'static') {
-					$sticky.removeAttr('style');
+						$sticky.removeAttr('style');
 
 					if ($layoutDiv && parentWidth < options.minParentWidth){
 						$layoutDiv.removeAttr('style');
 					}
 					} else {
-					$.extend(props, {'top': initialPosition.top + 'px', 'left': initialPosition.left + 'px'});
+						$.extend(props, {'top': initialPosition.top + 'px', 'left': initialPosition.left + 'px'});
 					}
 					$sticky.css(props);
 					lastApplied = 2;
 					if (options.onDetach) {
-					options.onDetach.call(sticky);
+						options.onDetach.call(sticky);
 					}
 					return;
 				}
 
 				// fixed
-				if (applyFixed && lastApplied !== 3 && windowSize.height > initialHeight) {
+				if (applyFixed && lastApplied !== 3 && windowSize.height > initialHeight + options.offset.top) {
 					$sticky.css({
 						'position':'fixed',
 						'top': parentPosition.top + (options.offset.top || 0) + 'px',
@@ -106,24 +124,6 @@
 				}
 
 			},
-			fnGetWindowSize = function() {
-				var windowSize = {
-					width: 0,
-					height: 0
-				};
-
-				if( typeof( window.innerWidth ) == 'number' ) {
-					//Non-IE
-					windowSize.width = window.innerWidth;
-					windowSize.height = window.innerHeight;
-				} else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
-					//IE 6+ in 'standards compliant mode'
-					windowSize.width = document.documentElement.clientWidth;
-					windowSize.height = document.documentElement.clientHeight;
-				}
-
-				return windowSize;
-			},
 			fnResizeHandler = function(e) {
 				var updatedHeight = $sticky.outerHeight(true);
 
@@ -134,24 +134,11 @@
 				resizing = true;
 				window.setTimeout(function() {
 
-					var windowSize = fnGetWindowSize();
-
 					if (unsticking) {
 						return;
 					}
 
-					if (windowSize.height < initialHeight) {
-						return;
-					}
-
-					var thisPositioning = $sticky.css('position');
-
 					initialPosition.left = $sticky.css('position', initialPositioning).offset().left;
-
-					$sticky.css({
-						position: thisPositioning,
-						width: 'auto'
-					});
 
 					if (options.preserveLayout) {
 						$layoutDiv.css({
