@@ -29,6 +29,7 @@
 				$sticky = $(sticky),
 				initialPosition = $sticky.offset(),
 				initialPositioning = $sticky.css('position'),
+				initialFloat = $sticky.css('float'),
 				initialWidth = $sticky.outerWidth(true),
 				initialHeight = $sticky.outerHeight(true),
 				initialMarginTop = (parseInt($sticky.css('margin-top'),10)),
@@ -125,7 +126,8 @@
 
 			},
 			fnResizeHandler = function(e) {
-				var updatedHeight = $sticky.outerHeight(true);
+				var updatedHeight = $sticky.outerHeight(true),
+						updatedWidth = $sticky.outerWidth(true);
 
 				if (resizing) {
 					return;
@@ -141,12 +143,17 @@
 					initialPosition.left = $sticky.css('position', initialPositioning).offset().left;
 
 					if (options.preserveLayout) {
+						$sticky.css({
+							width: initialWidth,
+							height: initialHeight
+						});
+
 						$layoutDiv.css({
 							width: 'auto',
 							height: 'auto'
 						});
 
-						initialWidth = $layoutDiv.outerWidth(true);
+						updatedWidth = $layoutDiv.outerWidth(true);
 						updatedHeight = $sticky.outerHeight(true);
 
 						// Update layout div
@@ -171,6 +178,8 @@
 			$(options.scrollParent).on('scroll', fnScrollHandler);
 
 			if ( options.preserveLayout ) {
+				if (initialFloat === 'right' || 'left') initialWidth = 100 + '%';
+
 				$layoutDiv = $('<div class="stickToTopLayout"></div>').css({
 					'height': initialHeight - initialMarginTop,
 					'width': initialWidth,
