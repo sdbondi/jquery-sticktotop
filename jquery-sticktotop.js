@@ -40,6 +40,7 @@
 				var scrollTop = scrollParent.scrollTop || $(document).scrollTop(),
 				parentHeight = ((scrollParent == window) ? window.document.body : scrollParent).offsetHeight,
 				parentWidth = ((scrollParent == window) ? window.document.body : scrollParent).offsetWidth,
+				windowSize = fnGetWindowSize(),
 				// If bottomBound, calculate bottom bound including height of the sticky
 				bottomBound = options.bottomBound && (parentHeight - options.bottomBound - initialHeight),
 
@@ -88,7 +89,7 @@
 				}
 
 				// fixed
-				if (applyFixed && lastApplied !== 3) {
+				if (applyFixed && lastApplied !== 3 && windowSize.height > initialHeight) {
 					$sticky.css({
 						'position':'fixed',
 						'top': parentPosition.top + (options.offset.top || 0) + 'px',
@@ -105,6 +106,24 @@
 				}
 
 			},
+			fnGetWindowSize = function() {
+				var windowSize = {
+					width: 0,
+					height: 0
+				};
+
+				if( typeof( window.innerWidth ) == 'number' ) {
+					//Non-IE
+					windowSize.width = window.innerWidth;
+					windowSize.height = window.innerHeight;
+				} else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+					//IE 6+ in 'standards compliant mode'
+					windowSize.width = document.documentElement.clientWidth;
+					windowSize.height = document.documentElement.clientHeight;
+				}
+
+				return windowSize;
+			},
 			fnResizeHandler = function(e) {
 				var updatedHeight = $sticky.outerHeight(true);
 
@@ -115,7 +134,13 @@
 				resizing = true;
 				window.setTimeout(function() {
 
+					var windowSize = fnGetWindowSize();
+
 					if (unsticking) {
+						return;
+					}
+
+					if (windowSize.height < initialHeight) {
 						return;
 					}
 
