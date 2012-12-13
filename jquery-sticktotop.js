@@ -29,17 +29,38 @@
 				$sticky = $(sticky),
 				initialPosition = $sticky.offset(),
 				initialPositioning = $sticky.css('position'),
+				isFloated = ($sticky.css('float') === 'none' ? false : true),
 				initialWidth = $sticky.outerWidth(true),
 				initialHeight = $sticky.outerHeight(true),
 				initialMarginTop = (parseInt($sticky.css('margin-top'),10)),
+				initialMarginLeft = (parseInt($sticky.css('margin-left'),10)),
 				resizing = false,
 				unsticking = false,
 				$layoutDiv,
 
+			fnGetWindowSize = function() {
+				var windowSize = {
+					width: 0,
+					height: 0
+				};
+
+				if( typeof( window.innerWidth ) == 'number' ) {
+					//Non-IE
+					windowSize.width = window.innerWidth;
+					windowSize.height = window.innerHeight;
+				} else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+					//IE 6+ in 'standards compliant mode'
+					windowSize.width = document.documentElement.clientWidth;
+					windowSize.height = document.documentElement.clientHeight;
+				}
+
+				return windowSize;
+			},
 			fnScrollHandler = function() {
 				var scrollTop = scrollParent.scrollTop || $(document).scrollTop(),
 				parentHeight = ((scrollParent == window) ? window.document.body : scrollParent).offsetHeight,
 				parentWidth = ((scrollParent == window) ? window.document.body : scrollParent).offsetWidth,
+				windowSize = fnGetWindowSize(),
 				// If bottomBound, calculate bottom bound including height of the sticky
 				bottomBound = options.bottomBound && (parentHeight - options.bottomBound - initialHeight),
 
@@ -58,7 +79,7 @@
 				// bottom bound
 				if (applyBottomBound && lastApplied !== 1) {
 					var currentPos = $sticky.offset();
-					$sticky.css({'position': 'absolute', 'top': bottomBound + 'px' , 'left': currentPos.left + 'px'});
+					$sticky.css({'position': 'absolute', 'top': bottomBound + 'px' , 'left': currentPos.left  + 'px'});
 					lastApplied = 1;
 					if (options.onDetach) {
 					options.onDetach.call(sticky);
@@ -71,29 +92,32 @@
 					(options.minParentHeight && parentHeight < options.minParentHeight)) {
 					var props = {'position': initialPositioning};
 					if (initialPositioning === 'static') {
-					$sticky.removeAttr('style');
+						$sticky.removeAttr('style');
 
 					if ($layoutDiv && parentWidth < options.minParentWidth){
 						$layoutDiv.removeAttr('style');
 					}
 					} else {
-					$.extend(props, {'top': initialPosition.top + 'px', 'left': initialPosition.left + 'px'});
+						$.extend(props, {'top': initialPosition.top + 'px', 'left': initialPosition.left});
 					}
 					$sticky.css(props);
 					lastApplied = 2;
 					if (options.onDetach) {
-					options.onDetach.call(sticky);
+						options.onDetach.call(sticky);
 					}
 					return;
 				}
 
 				// fixed
-				if (applyFixed && lastApplied !== 3) {
+				if (applyFixed && lastApplied !== 3 && windowSize.height > initialHeight + options.offset.top) {
+
+					if (isFloated) initialWidth = $sticky.outerWidth();
+
 					$sticky.css({
 						'position':'fixed',
-						'top': parentPosition.top + (options.offset.top || 0) + 'px',
-						'left': (parentPosition.left + initialPosition.left + (options.offset.left || 0))+'px',
-						'width': initialWidth+'px',
+						'top': parentPosition.top + (options.offset.top || 0),
+						'left': (parentPosition.left + initialPosition.left + (options.offset.left - initialMarginLeft || 0)),
+						'width': initialWidth,
 						'z-index': 1000
 					});
 
@@ -106,7 +130,8 @@
 
 			},
 			fnResizeHandler = function(e) {
-				var updatedHeight = $sticky.outerHeight(true);
+				var updatedHeight = $sticky.outerHeight(true),
+						updatedWidth = $sticky.outerWidth(true);
 
 				if (resizing) {
 					return;
@@ -119,14 +144,7 @@
 						return;
 					}
 
-					var thisPositioning = $sticky.css('position');
-
 					initialPosition.left = $sticky.css('position', initialPositioning).offset().left;
-
-					$sticky.css({
-						position: thisPositioning,
-						width: 'auto'
-					});
 
 					if (options.preserveLayout) {
 						$layoutDiv.css({
@@ -134,7 +152,7 @@
 							height: 'auto'
 						});
 
-						initialWidth = $layoutDiv.outerWidth(true);
+						if (!isFloated) initialWidth = $layoutDiv.outerWidth(true);
 						updatedHeight = $sticky.outerHeight(true);
 
 						// Update layout div
@@ -159,9 +177,11 @@
 			$(options.scrollParent).on('scroll', fnScrollHandler);
 
 			if ( options.preserveLayout ) {
+				var layoutWidth = (isFloated) ? 100 + '%' : initialWidth;
+
 				$layoutDiv = $('<div class="stickToTopLayout"></div>').css({
 					'height': initialHeight - initialMarginTop,
-					'width': initialWidth,
+					'width': layoutWidth,
 					'margin-top': initialMarginTop
 				});
 				$layoutDiv = $sticky.wrap($layoutDiv).parent();
