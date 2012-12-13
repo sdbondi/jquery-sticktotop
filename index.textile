@@ -7,13 +7,17 @@ scriptSnippet: $('.sticky').stickToTop();
 
 All it takes to make an element stick is the following:
 
-pre(mb-gamma). $('.sticky').stickToTop();
+{% highlight javascript %}
+$('.sticky').stickToTop();
+{% endhighlight %}
 
 h2. Options:
 
 The plugin makes a few options available:
 
-pre. $('.sticky').stickToTop({ options });
+{% highlight javascript %}
+$('.sticky').stickToTop({ options });
+{% endhighlight %}
 
 table(mb-beta).
 |_. Option							|_. Description |
