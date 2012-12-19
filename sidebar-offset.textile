@@ -1,15 +1,24 @@
 ---
 layout: page
-title: sidebar
+title: sidebar with offset
 stickySidebarClass: sticky-sidebar
-scriptSnippet: $('.sticky-sidebar').stickToTop();
+stickyNavClass: sticky
+scriptSnippet: |
+  var $stickyNav = $('.sticky'),
+      navHeight	 = $stickyNav.outerHeight(true);
+  $stickyNav.stickToTop();
+  $('.sticky-sidebar').stickToTop({ offset: {top: navHeight}});
 group: examples
 ---
 
-Sticking a sidebar to the top of a page is as intuitive:
+For situations where you need to offset where an element begins to stick, such as when sticking a sidebar and a navigation simultaneously, the @offset@ option can be used:
+
 
 {% highlight javascript %}
-$('.sticky-sidebar').stickToTop();
+// get the height of the navigation
+var navHeight = $('.sticky').outerHeight(true);
+
+$('.sticky-sidebar').stickToTop({ offset: {top: navHeight}});
 {% endhighlight %}
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
