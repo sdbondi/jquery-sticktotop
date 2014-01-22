@@ -1,6 +1,6 @@
 /*global window */
 (function(document, $) {
-    "use strict";
+	"use strict";
 
 	$.fn.stickToTop = function(options) {
 		options = $.extend({
@@ -33,6 +33,11 @@
 					resizing = false,
 					unsticking = false,
 					$layoutDiv,
+
+			getParentWidth = function() {
+				var width = (scrollParent == window ? window.document.body : scrollParent).offsetWidth;
+				return width;
+			},
 
 			fnScrollHandler = function() {
 				var scrollTop = scrollParent.scrollTop || $(document).scrollTop(),
@@ -104,7 +109,7 @@
 			fnResizeHandler = function(e) {
 				var updatedHeight = initialHeight;
 
-				if (resizing) {
+				if (resizing || (options.minParentWidth && getParentWidth() < options.minParentWidth)) {
 					return;
 				}
 
@@ -118,6 +123,7 @@
 					var thisPositioning = $sticky.css('position');
 
 					initialPosition.left = $sticky.css('position', initialPositioning).position().left;
+					initialPosition.top = $sticky.css('position', initialPositioning).position().top;
 
 					$sticky.css({
 						position: thisPositioning,
@@ -167,7 +173,13 @@
 			$(options.scrollParent).on('scroll', fnScrollHandler);
 
 			if ( options.preserveLayout ) {
-				$layoutDiv = $('<div></div>').css({'height': initialHeight, 'width': initialWidth});
+
+				if ( getParentWidth() >= options.minParentWidth ) {
+					$layoutDiv = $('<div></div>').css({'height': initialHeight, 'width': initialWidth});
+				} else {
+					$layoutDiv = $('<div></div>').css({'height': 'auto', 'width': 'auto'});
+				}
+
 				$layoutDiv = $sticky.wrap($layoutDiv).parent();
 			}
 
@@ -181,3 +193,4 @@
 	};
 
 }(window.document, window.jQuery));
+
