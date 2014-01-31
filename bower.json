@@ -1,7 +1,7 @@
 {
-  "name": "jQuery-stickToTop",
+  "name": "jquery-sticktotop",
   "version": "0.5.0",
-  "homepage": "https://github.com/sdbondi/JQuery-StickToTop",
+  "homepage": "https://github.com/sdbondi/jquery-sticktotop",
   "authors": [
     "Stan <stan@fixate.it>",
     "Larry <larry@fixate.it>"

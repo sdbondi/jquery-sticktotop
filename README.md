@@ -8,7 +8,7 @@ Perfect for sidebars.
 ## Bower
 
 ```
-bower install jQuery-stickToTop
+bower install jquery-sticktotop
 ```
 
 ## Usage
