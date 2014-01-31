@@ -1,0 +1,24 @@
+{
+  "name": "jQuery-stickToTop",
+  "version": "0.5.0",
+  "homepage": "https://github.com/sdbondi/JQuery-StickToTop",
+  "authors": [
+    "Stan <stan@fixate.it>",
+    "Larry <larry@fixate.it>"
+  ],
+  "description": "Make any element stick to the top of the page when scrolling down",
+  "main": "jquery-sticktotop.js",
+  "keywords": [
+    "jquery",
+    "sticktotop",
+    "plugin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
