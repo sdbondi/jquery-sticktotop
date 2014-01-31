@@ -1,9 +1,15 @@
 # jquery-sticktotop.js Version 0.1.1
 
 A JQuery plugin to make your elements stick to the top when scrolling a webpage.
-It takes the initial position of any element and gives the element a fixed 
+It takes the initial position of any element and gives the element a fixed
 position when scrolling past it, ensuring the element always stays in view.
 Perfect for sidebars.
+
+## Bower
+
+```
+bower install jQuery-stickToTop
+```
 
 ## Usage
 
@@ -24,7 +30,7 @@ $('aside').stickToTop(options);
   </tr>
   <tr>
     <th>offset:</th>
-    <td>Scroll offset to apply fixed positioning (sticking).    
+    <td>Scroll offset to apply fixed positioning (sticking).
     Basically the gap left at all times between the scrollParent and the target element.  <br><br>
     default: {top: 0, left: 0}</td>
   </tr>
@@ -32,7 +38,7 @@ $('aside').stickToTop(options);
     <th>bottomBound:</th>
     <td>  Scroll value relative to the bottom which to stop the element
     from sticking (absolute positioning).<br>
-    Useful if you have a large footer and dont want your sidebar 
+    Useful if you have a large footer and dont want your sidebar
     crashing into it.<br><br>
     default: false (no bottom bound)</td>
   </tr>
@@ -56,7 +62,7 @@ $('aside').stickToTop(options);
   </tr>
   <tr>
     <th>preserveLayout:</th>
-    <td>Preserves layout of sticky elements by adding a div which 
+    <td>Preserves layout of sticky elements by adding a div which
     occupies the original flow.<br><br>
 
     **Note: Floated elements do not occupy flow in the same manner as non-floated elements.<br>
