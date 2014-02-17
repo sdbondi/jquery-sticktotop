@@ -72,8 +72,8 @@ module.exports = (grunt) ->
 			dist:
 				src: "<%= pkg.path.js %>/**.js"
 				options:
-					specs: 'test/spec/*Spec.js',
-					helpers: 'test/spec/*Helper.js',
+					specs: 'spec/*Spec.js',
+					helpers: 'spec/*Helper.js',
 					template: 'custom.tmpl'
 
 
