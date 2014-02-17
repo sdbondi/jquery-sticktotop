@@ -24,6 +24,25 @@ module.exports = (grunt) ->
 
 
 		#*------------------------------------*\
+		#   $BUMP
+		#*------------------------------------*/
+		bump:
+			options:
+				files: [
+					'package.json',
+					'bower.json'
+				]
+				commit: true
+				commitMessage: 'bump version to %VERSION%'
+				commitFiles: [
+					'package.json',
+					'bower.json'
+				]
+				createTag: false
+				push: false
+
+
+		#*------------------------------------*\
 		#   $CONTRIB-COFFEE
 		#*------------------------------------*/
 		coffee:
