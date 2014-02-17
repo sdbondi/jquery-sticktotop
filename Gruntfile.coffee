@@ -66,6 +66,18 @@ module.exports = (grunt) ->
 
 
 		#*------------------------------------*\
+		#   $CONTRIB-JASMINE
+		#*------------------------------------*/
+		jasmine:
+			dist:
+				src: "<%= pkg.path.js %>/**.js"
+				options:
+					specs: 'test/spec/*Spec.js',
+					helpers: 'test/spec/*Helper.js',
+					template: 'custom.tmpl'
+
+
+		#*------------------------------------*\
 		#   $CONTRIB-UGLIFY
 		#*------------------------------------*/
 		uglify:
