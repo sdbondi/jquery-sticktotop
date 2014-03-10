@@ -3,22 +3,35 @@
   "version": "0.5.0",
   "homepage": "https://github.com/sdbondi/jquery-sticktotop",
   "authors": [
-    "Stan <stan@fixate.it>",
-    "Larry <larry@fixate.it>"
+    "Stan Bondi <stan@fixate.it>",
+    "Larry Botha <larry@fixate.it>"
   ],
-  "description": "Make any element stick to the top of the page when scrolling down",
-  "main": "jquery-sticktotop.js",
+  "description": "Make any element stick to the top of a page when scrolling",
+	"main": [
+		"src/jquery-sticktotop.js",
+		"src/jquery-sticktotop.min.js"
+	],
   "keywords": [
     "jquery",
     "sticktotop",
+		"sticky",
     "plugin"
   ],
+	"dependencies": {
+		"jquery": ">=1.8.3"
+	},
   "license": "MIT",
   "ignore": [
-    "**/.*",
+		"bower_components",
+    "coffee",
+    "examples",
     "node_modules",
-    "bower_components",
     "test",
-    "tests"
+    "tests",
+		"spec",
+		"**/.*",
+		"Gruntfile.coffee",
+		"package.json",
+		"README.md"
   ]
 }
