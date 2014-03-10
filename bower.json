@@ -14,6 +14,7 @@
   "keywords": [
     "jquery",
     "sticktotop",
+		"sticky",
     "plugin"
   ],
 	"dependencies": {
@@ -21,13 +22,16 @@
 	},
   "license": "MIT",
   "ignore": [
-    "**/.*",
+		"bower_components",
+    "coffee",
     "examples",
     "node_modules",
-    "bower_components",
     "test",
     "tests",
 		"spec",
+		"**/.*",
+		"Gruntfile.coffee",
+		"package.json",
 		"README.md"
   ]
 }
