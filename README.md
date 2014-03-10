@@ -43,20 +43,20 @@ $('aside').stickToTop(options);
     default: false (no bottom bound)</td>
   </tr>
   <tr>
-    <th>minParentHeight:</th>
+    <th>minWindowHeight:</th>
     <td>The minimum height of the parent/window in which stickToTop will be active.<br>
     If less than the minimum height stickToTop will have no effect but will
-    become active as soon as the parent/window height is greater than minParentHeight.<br><br>
+    become active as soon as the parent/window height is greater than minWindowHeight.<br><br>
     default: false (no min height)</td>
   </tr>
   <tr>
-    <th>minParentWidth:</th>
+    <th>minWindowWidth:</th>
     <td>The minimum width of the parent/window in which stickToTop will be active.<br>
     If less than the minimum width stickToTop will have no effect but will
-    become active as soon as the parent/window width is greater than minParentWidth.<br>
+    become active as soon as the parent/window width is greater than minWindowWidth.<br>
     Useful for disabling stickToTop for mobile and tablet viewports.<br><br>
 
-    **Note: If using ems for your media queries, make sure to multiply the respective value by 16.<br>
+    **Note: If using ems for your media queries, make sure to multiply your value by 16 to set minWindowWidth as a pixel value.<br>
     <a href="http://filamentgroup.com/lab/how_we_learned_to_leave_body_font_size_alone/">Browsers calculate media-query widths from the base UA font size</a>, <strong>NOT</strong> stylesheet base font size.<br><br>
     default: false (no min width)</td>
   </tr>
