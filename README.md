@@ -1,8 +1,7 @@
-# jquery-sticktotop.js Version 0.1.1
+# Jquery StickToTop
 
-A JQuery plugin to make your elements stick to the top when scrolling a webpage.
-It takes the initial position of any element and gives the element a fixed
-position when scrolling past it, ensuring the element always stays in view.
+A JQuery plugin to make your elements stick to the top when scrolling a webpage. It takes the initial position of any element and gives the element a fixed position when scrolling past it, ensuring the element always stays in view.
+
 Perfect for sidebars.
 
 ## Bower
@@ -82,8 +81,7 @@ $('aside').stickToTop(options);
   </tr>
 </table>
 
-**Note**: bottomBound now includes the height of the sticky element in the calculation
-to make bottomBound more intuitive (issue #1)
+**Note**: bottomBound now includes the height of the sticky element in the calculation to make bottomBound more intuitive (issue #1)
 
 ## unstickToTop
 
@@ -107,11 +105,10 @@ The "normal" use-case for this plugin demostrated applying the plugin to a side 
 
 ### Tetris Hearts
 
-Using this plugin to position many elements (in this case a canvas with a tetris block painted
-inside of it) and stick them to their appropriate places while scrolling to form a heart.
+Using this plugin to position many elements (in this case a canvas with a tetris block painted inside of it) and stick them to their appropriate places while scrolling to form a heart.
 
 Visit [this blog post](http://mopo.ws/wZz1Xb) for a full explanation
 
 ## License
 
-See the file [LICENSE](https://github.com/sdbondi/JQuery-StickToTop/blob/master/LICENSE.txt)
+MIT: http://fixate.mit-license.org/
