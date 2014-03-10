@@ -57,15 +57,6 @@ module.exports = (grunt) ->
 
 
 		#*------------------------------------*\
-		#   $CONTRIB-WATCH
-		#*------------------------------------*/
-		watch:
-			coffee:
-				files: ['<%= pkg.path.coffee %>/**/*.coffee'],
-				tasks: ['coffee:dist']
-
-
-		#*------------------------------------*\
 		#   $CONTRIB-JASMINE
 		#*------------------------------------*/
 		jasmine:
@@ -84,6 +75,15 @@ module.exports = (grunt) ->
 			target:
 				files:
 					'<%= pkg.path.js %>/jquery-sticktotop.min.js': '<%= pkg.path.js %>/jquery-sticktotop.js'
+
+
+		#*------------------------------------*\
+		#   $CONTRIB-WATCH
+		#*------------------------------------*/
+		watch:
+			coffee:
+				files: ['<%= pkg.path.coffee %>/**/*.coffee'],
+				tasks: ['coffee:dist']
 
 
 	#*------------------------------------*\
