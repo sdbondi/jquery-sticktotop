@@ -86,7 +86,31 @@ module.exports = (grunt) ->
 				tasks: ['coffee:dist']
 
 
+		#*------------------------------------*\
+		#   $DEV UPDATE
+		#*------------------------------------*/
+		devUpdate:
+			options:
+				reportUpdated: false
+				semver: true
+				packages:
+					devDependencies: true
+					dependencies: false
+				packageJson: null
+			check:
+				updateType: 'report'
+			ask:
+				options:
+					updateType: 'prompt'
+			up:
+				options:
+					updateType: 'force'
+
+
 	#*------------------------------------*\
 	#   $TASKS
 	#*------------------------------------*/
-	grunt.registerTask('default', ['watch'])
+	grunt.registerTask 'default', ['watch']
+	grunt.registerTask 'depcheck', ['devUpdate:check']
+	grunt.registerTask 'depask', ['devUpdate:ask']
+	grunt.registerTask 'depup', ['devUpdate:up']
